@@ -18,6 +18,9 @@ struct LoginScreen: View {
         let eyeImageName = passwordHidden ? "eye" : "eye.slash"
         let createAccountEnabled = passwordField.count > 0 && nameField.count > 0 ? true : false
         let createAccountButtonColor = createAccountEnabled ? Color("game_purple") : Color(uiColor: .systemGray)
+        let nameFieldColor = nameField.count > 0 ? Color(uiColor: .systemGreen) : Color(uiColor: .systemGray)
+        let passwordFieldColor = passwordField.count > 0 ? Color(uiColor: .systemGreen) : Color(uiColor: .systemGray)
+        
         ZStack(alignment: .bottom) {
             Image("background")
                 .resizable()
@@ -45,7 +48,7 @@ struct LoginScreen: View {
                     .textInputAutocapitalization(.never)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, maxHeight: 45)
-                    .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color(uiColor: .systemGray), style: StrokeStyle(lineWidth: 0.5)))
+                    .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(nameFieldColor, style: StrokeStyle(lineWidth: 0.5)))
                     
                     
                     Text("max. 40").frame(maxWidth: .infinity, alignment: .trailing)
@@ -87,7 +90,7 @@ struct LoginScreen: View {
                         }
 
                         
-                    }.overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color(uiColor: .systemGray), style: StrokeStyle(lineWidth: 0.5)))
+                    }.overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(passwordFieldColor, style: StrokeStyle(lineWidth: 0.5)))
                     
 
                     

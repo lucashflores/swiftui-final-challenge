@@ -12,24 +12,69 @@ struct GamesScreen: View {
     @State var searchTerm = ""
     var games = Game.populateGames()
     let columns = [GridItem(.adaptive(minimum: 150))]
+    @State var favoriteGames: [Game] = []
+    var favoriteFilteredGames: [Game] {
+        guard !searchTerm.isEmpty else { return favoriteGames}
+        return favoriteGames.filter { $0.name.localizedCaseInsensitiveContains(searchTerm)}
+    }
     var filteredGames: [Game] {
         guard !searchTerm.isEmpty else { return games}
         return games.filter { $0.name.localizedCaseInsensitiveContains(searchTerm)}
     }
+    
+    
     var body: some View {
+        let otherGames = filteredGames.filter { !favoriteFilteredGames.contains($0)}
+        
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(filteredGames) { game in
-                        NavigationLink {
-                            GameInfoScreen(game: game)
-                        } label: {
-                            GameCard(gameName: game.name, gameInfo: game.info, gameImageName: game.imageName)
-                                
-                        }.padding()
+                if (!favoriteGames.isEmpty) {
+                    LazyVGrid(
+                        columns: columns,
+                        alignment: .leading,
+                        spacing: 16,
+                        pinnedViews: [.sectionHeaders]
+                    ) {
+                        Section(header: Text("Favoritos").font(.title).bold().padding(.horizontal)) {
+                            ForEach(favoriteFilteredGames) { game in
+                                NavigationLink {
+                                    GameInfoScreen(game: game)
+                                } label: {
+                                    GameCard(game: game, favoriteGames: $favoriteGames)
+                                        
+                                }.padding()
+                            }
+                        }
 
+                        Section(header: Text("Outros").font(.title).bold().padding(.horizontal)) {
+                            ForEach(otherGames) { game in
+                                NavigationLink {
+                                    GameInfoScreen(game: game)
+                                } label: {
+                                    GameCard(game: game, favoriteGames: $favoriteGames)
+                                        
+                                }.padding()
+                            }
+                        }
+                        Spacer()
                     }
-                }.padding()
+                    .padding()
+                    
+                }
+                else
+                {
+                    LazyVGrid(columns: columns) {
+                        ForEach(filteredGames) { game in
+                            NavigationLink {
+                                GameInfoScreen(game: game)
+                            } label: {
+                                GameCard(game: game, favoriteGames: $favoriteGames)
+                                    
+                            }.padding()
+
+                        }
+                    }.padding()
+                }
             }
             .buttonStyle(PlainButtonStyle())
             .navigationTitle("Jogos")

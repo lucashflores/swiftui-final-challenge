@@ -11,7 +11,7 @@ struct GameInfoScreen: View {
     var game: Game
     var body: some View {
         ZStack(alignment: .bottom) {
-            ScrollView {
+            
                 Image(game.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -41,17 +41,19 @@ struct GameInfoScreen: View {
                             .foregroundColor(Color(uiColor: .systemGray))
                             .font(.body)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        
 
                     }
-
+                    
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 120)
                 .padding(.horizontal, 30)
                 .padding(.top, 30)
                 .frame(maxWidth: .infinity)
                 .background(.white)
                 .cornerRadius(12)
-            }
+                
             
         }.ignoresSafeArea()
     }

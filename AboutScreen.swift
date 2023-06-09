@@ -33,7 +33,7 @@ struct AboutScreen: View {
                         .font(.body)
                         .foregroundColor(Color(uiColor: .systemGray))
                 }
-                .padding(.bottom, 50)
+                .padding(.bottom, 120)
                 .padding(.horizontal, 30)
                 .padding(.top, 30)
                 .frame(maxWidth: .infinity)
