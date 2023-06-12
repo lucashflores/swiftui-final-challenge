@@ -12,7 +12,7 @@ struct GameInfoScreen: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             
-                Image(game.imageName)
+                Image(game.fullImageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxHeight: .infinity, alignment: .top)
@@ -31,7 +31,7 @@ struct GameInfoScreen: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
 
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("Sobre")
                             .bold()
                             .font(.title3)
@@ -61,6 +61,6 @@ struct GameInfoScreen: View {
 
 struct GameInfoScreen_Previews: PreviewProvider {
     static var previews: some View {
-        GameInfoScreen(game: Game(name: "Roots of Pacha", info: "RPG, Aventura", description: "Você vagou pelas selvas primitivas. Agora, é hora de você construir uma vila que permanecerá por gerações. Junte-se aos seus amigos para criar uma comunidade próspera, plante semeie e colha, faça amizade com animais, desbloqueie tecnologias, participe de festivais e encontre amor.", imageName: "rp"))
+        GameInfoScreen(game: Game(name: "Roots of Pacha", info: "RPG, Aventura", description: "Você vagou pelas selvas primitivas. Agora, é hora de você construir uma vila que permanecerá por gerações. Junte-se aos seus amigos para criar uma comunidade próspera, plante semeie e colha, faça amizade com animais, desbloqueie tecnologias, participe de festivais e encontre amor.", imageName: "rp", fullImageName: "rpfull"))
     }
 }

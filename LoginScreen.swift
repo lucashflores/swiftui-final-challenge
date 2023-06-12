@@ -24,7 +24,7 @@ struct LoginScreen: View {
         ZStack(alignment: .bottom) {
             Image("background")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
             
             VStack(spacing: 20) {
                 VStack(spacing: 5) {

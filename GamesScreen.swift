@@ -29,6 +29,7 @@ struct GamesScreen: View {
         NavigationStack {
             ScrollView {
                 if (!favoriteGames.isEmpty) {
+                    
                     LazyVGrid(
                         columns: columns,
                         alignment: .leading,
@@ -41,8 +42,8 @@ struct GamesScreen: View {
                                     GameInfoScreen(game: game)
                                 } label: {
                                     GameCard(game: game, favoriteGames: $favoriteGames)
-                                        
                                 }.padding()
+                                    
                             }
                         }
 
@@ -52,12 +53,15 @@ struct GamesScreen: View {
                                     GameInfoScreen(game: game)
                                 } label: {
                                     GameCard(game: game, favoriteGames: $favoriteGames)
-                                        
-                                }.padding()
+                                        .transition(.move(edge: .trailing))
+                                }
+                                
+                                .padding()
                             }
                         }
                         Spacer()
                     }
+                    
                     .padding()
                     
                 }
@@ -71,11 +75,14 @@ struct GamesScreen: View {
                                 GameCard(game: game, favoriteGames: $favoriteGames)
                                     
                             }.padding()
-
+                                
                         }
                     }.padding()
+                        
+
                 }
             }
+            .animation(.easeOut(duration: 0.25), value: favoriteGames.isEmpty)
             .buttonStyle(PlainButtonStyle())
             .navigationTitle("Jogos")
             .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Games")

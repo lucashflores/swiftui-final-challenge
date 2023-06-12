@@ -29,7 +29,7 @@ struct AppTabView: View {
                 .tabItem {
                     Label("Sobre", systemImage: "iphone.gen2")
                 }
-        }
+        }.tabViewStyle(.automatic)
     }
 }
 

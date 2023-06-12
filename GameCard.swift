@@ -13,9 +13,12 @@ struct GameCard: View {
     
     var body: some View {
         let starIcon = favoriteGames.contains(game) ? "star.fill" : "star"
-        ZStack(alignment: .bottom) {
+        let starIconColor = favoriteGames.contains(game) ? Color(uiColor: .systemYellow) : Color(uiColor: .systemGray)
+        VStack(spacing: 0) {
             Image(self.game.imageName)
                 .resizable()
+                .frame(width: 160, height: 105)
+                
             
             HStack(spacing: 10) {
                 VStack(alignment: .leading) {
@@ -34,28 +37,33 @@ struct GameCard: View {
                     }
                 } label: {
                     Image(systemName: starIcon)
-                        .foregroundColor(.black)
+                        .foregroundColor(starIconColor)
                 }
-                
-                
-                
+
+
+
             }
-            .padding(10)
-            .frame(maxWidth: .infinity)
+            .frame(maxHeight: 50)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 15)
             .background(.white)
             //            .padding(.horizontal)
             //            .cornerRadius(10)
             
         }
         .clipShape(RoundedRectangle(cornerRadius: 10.0))
+        
         .shadow(radius: 2.5)
-        .frame(width: 150, height: 185)
+        
+        .frame(width: 160, height: 155)
+        
+        
             
     }
 }
 
 struct GameCard_Previews: PreviewProvider {
     static var previews: some View {
-        GameCard(game: Game(name: "Roots of Pacha", info: "RPG, Aventura", description: "Você vagou pelas selvas primitivas. Agora, é hora de você construir uma vila que permanecerá por gerações. Junte-se aos seus amigos para criar uma comunidade próspera, plante semeie e colha, faça amizade com animais, desbloqueie tecnologias, participe de festivais e encontre amor.", imageName: "rp"), favoriteGames: .constant([]))
+        GameCard(game: Game(name: "Resident Evil 4", info: "Terror, Sobrevivência", description: "Sobrevivência é apenas o começo. Seis anos se passaram desde o desastre biológico em Raccoon City. Leon S. Kennedy, um dos sobreviventes, segue o rastro da raptada filha do presidente até uma vila europeia isolada, onde há algo terrivelmente errado com os habitantes.", imageName: "sot", fullImageName: "sotfull"), favoriteGames: .constant([]))
     }
 }
